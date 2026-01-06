@@ -371,7 +371,15 @@ const Dashboard = () => {
 
     return (
         <div className={`flex min-h-screen ${theme.bg} ${theme.text}`}>
-            <aside className={`${sidebarOpen ? 'w-64' : 'w-0'} ${theme.sidebar} border-r transition-all duration-300 overflow-hidden flex flex-col`}>
+            {/* Mobile sidebar backdrop */}
+            {sidebarOpen && (
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
+            
+            <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:relative z-30 w-64 ${theme.sidebar} border-r transition-transform duration-300 flex flex-col h-full`}>
                 <div className="p-6 flex-1">
                     <div className="flex items-center gap-2 mb-8">
                         <div className="text-blue-500 text-2xl">📝</div>
@@ -429,20 +437,26 @@ const Dashboard = () => {
             </aside>
             <main className="flex-1 flex flex-col">
                 <header className={`border-b ${theme.border} ${theme.bg}`}>
-                    <div className="px-6 py-4 flex items-center gap-4">
-                        <button onClick={() => setSidebarOpen(!sidebarOpen)} className={`${theme.textSecondary} hover:${theme.text} transition md:hidden`}>
+                    <div className="px-4 sm:px-6 py-4 flex items-center gap-2 sm:gap-4">
+                        <button onClick={() => setSidebarOpen(!sidebarOpen)} className={`${theme.textSecondary} hover:${theme.text} transition`}>
                             <FiMenu size={24} />
                         </button>
                         <div className="flex-1 max-w-xl">
                             <div className="relative">
                                 <FiSearch className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${theme.textSecondary}`} size={18} />
-                                <input type="text" placeholder="Search titles or content..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={`w-full pl-10 pr-4 py-2 ${theme.inputBg} border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme.text} placeholder-gray-500`} />
+                                <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className={`w-full pl-10 pr-4 py-2 ${theme.inputBg} border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme.text} placeholder-gray-500 text-sm sm:text-base`} />
                             </div>
                         </div>
                         {currentView !== 'trash' && (
-                            <button onClick={() => openModal()} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition font-medium">
+                            <button onClick={() => openModal()} className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition font-medium">
                                 <FiPlus size={18} />
-                                Create New Note
+                                <span className="hidden lg:inline">Create New Note</span>
+                                <span className="lg:hidden">New</span>
+                            </button>
+                        )}
+                        {currentView !== 'trash' && (
+                            <button onClick={() => openModal()} className="sm:hidden p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+                                <FiPlus size={20} />
                             </button>
                         )}
                         <button onClick={handleLogout} className={`p-2 ${theme.textSecondary} hover:text-red-400 transition`} title="Logout">
@@ -450,11 +464,11 @@ const Dashboard = () => {
                         </button>
                     </div>
                 </header>
-                <div className="flex-1 overflow-y-auto p-6">
-                    <div className="mb-6">
+                <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                    <div className="mb-4 sm:mb-6">
                         <div className="flex items-center justify-between mb-2">
-                            <h1 className={`${fontSize.heading} font-bold`}>All Notes <span className={theme.textTertiary}>({filteredNotes.length})</span></h1>
-                            <div className={`flex items-center gap-2 text-sm ${theme.textSecondary} relative`}>
+                            <h1 className={`text-2xl sm:${fontSize.heading} font-bold`}>All Notes <span className={theme.textTertiary}>({filteredNotes.length})</span></h1>
+                            <div className={`flex items-center gap-2 text-xs sm:text-sm ${theme.textSecondary} relative`}>
                                 <span>Sort by:</span>
                                 <button 
                                     onClick={() => setShowSortMenu(!showSortMenu)}
@@ -489,17 +503,17 @@ const Dashboard = () => {
                         </div>
                         <p className={theme.textSecondary}>View and manage your personal thoughts.</p>
                     </div>
-                    <div className="flex gap-3 mb-6">
-                        <button onClick={() => setActiveFilter('All')} className={`px-4 py-2 rounded-lg font-medium transition ${activeFilter === 'All' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>All</button>
-                        <button onClick={() => setActiveFilter('Work')} className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${activeFilter === 'Work' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>
+                    <div className="flex gap-2 sm:gap-3 mb-4 sm:mb-6 overflow-x-auto pb-2 scrollbar-hide">
+                        <button onClick={() => setActiveFilter('All')} className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition whitespace-nowrap text-sm ${activeFilter === 'All' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>All</button>
+                        <button onClick={() => setActiveFilter('Work')} className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition whitespace-nowrap text-sm ${activeFilter === 'Work' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>
                             <span className="w-2 h-2 rounded-full bg-purple-500"></span>
                             Work
                         </button>
-                        <button onClick={() => setActiveFilter('Personal')} className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${activeFilter === 'Personal' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>
+                        <button onClick={() => setActiveFilter('Personal')} className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition whitespace-nowrap text-sm ${activeFilter === 'Personal' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>
                             <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                             Personal
                         </button>
-                        <button onClick={() => setActiveFilter('Reading')} className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${activeFilter === 'Reading' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>
+                        <button onClick={() => setActiveFilter('Reading')} className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium transition whitespace-nowrap text-sm ${activeFilter === 'Reading' ? `${theme.buttonBg} ${theme.text}` : `${theme.textSecondary} ${theme.hoverBg}`}`}>
                             <span className="w-2 h-2 rounded-full bg-green-500"></span>
                             Reading
                         </button>
@@ -521,7 +535,7 @@ const Dashboard = () => {
                             )}
                         </div>
                     ) : (
-                        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${compact.gap}`}>
+                        <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${compact.gap}`}>
                             {filteredNotes.map((note) => {
                                 const { icon: Icon, color, iconColor } = getNoteIcon(note.tags);
                                 return (
@@ -575,7 +589,7 @@ const Dashboard = () => {
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
                     <div className={`${theme.modalBg} rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border`}>
-                        <div className="p-6">
+                        <div className="p-4 sm:p-6">
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className={`text-2xl font-bold ${theme.text}`}>{editingNote ? 'Edit Note' : 'Create New Note'}</h3>
                                 <button onClick={closeModal} className={`${theme.textSecondary} hover:${theme.text} text-2xl`}><FiX /></button>
@@ -609,7 +623,7 @@ const Dashboard = () => {
             {viewingNote && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4" onClick={() => setViewingNote(null)}>
                     <div className={`${theme.modalBg} rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border`} onClick={(e) => e.stopPropagation()}>
-                        <div className="p-6">
+                        <div className="p-4 sm:p-6">
                             <div className="flex justify-between items-start mb-4">
                                 <div className="flex-1">
                                     <h2 className={`text-3xl font-bold ${theme.text} mb-2`}>{viewingNote.title}</h2>
@@ -638,7 +652,7 @@ const Dashboard = () => {
             {showSettings && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4">
                     <div className={`${theme.modalBg} rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border`}>
-                        <div className="p-6">
+                        <div className="p-4 sm:p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className={`text-2xl font-bold ${theme.text}`}>Settings</h3>
                                 <button onClick={() => setShowSettings(false)} className={`${theme.textSecondary} hover:${theme.text} text-2xl`}><FiX /></button>

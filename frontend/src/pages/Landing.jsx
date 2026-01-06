@@ -8,38 +8,44 @@ function Landing() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       
-      <nav className="flex items-center justify-between px-8 py-4 border-b border-slate-700">
+      <nav className="flex items-center justify-between px-4 sm:px-8 py-4 border-b border-slate-700">
         <div className="flex items-center gap-2">
           <div className="text-blue-500 text-2xl">📝</div>
           <span className="text-xl font-bold">NoteX</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6">
           <a href="#features" className="hover:text-blue-400 transition">Features</a>
           <Link to="/login" className="hover:text-blue-400 transition">Log in</Link>
           <Link to="/signup" className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg transition">
             Get Started
           </Link>
         </div>
+        <div className="flex md:hidden items-center gap-3">
+          <Link to="/login" className="text-sm hover:text-blue-400 transition">Log in</Link>
+          <Link to="/signup" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm rounded-lg transition">
+            Sign Up
+          </Link>
+        </div>
       </nav>
 
       
-      <section className="px-8 py-20 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="px-4 sm:px-8 py-12 sm:py-20 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
-            <h1 className="text-6xl font-bold mb-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
               Your Thoughts.
               <br />
               <span className="text-blue-500">Organized.</span> Private.
             </h1>
-            <p className="text-slate-300 text-lg mb-8">
+            <p className="text-slate-300 text-base sm:text-lg mb-6 sm:mb-8">
               The distraction-free space for your personal notes, ideas, and daily journals. 
               Encrypted for your eyes only.
             </p>
-            <div className="flex gap-4 mb-4">
-              <Link to="/signup" className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
+              <Link to="/signup" className="bg-blue-600 hover:bg-blue-700 px-6 sm:px-8 py-3 rounded-lg font-semibold transition text-center">
                 Start Writing Now
               </Link>
-              <a href="#features" className="border border-slate-600 hover:border-slate-500 px-8 py-3 rounded-lg font-semibold transition">
+              <a href="#features" className="border border-slate-600 hover:border-slate-500 px-6 sm:px-8 py-3 rounded-lg font-semibold transition text-center">
                 Learn More
               </a>
             </div>
@@ -66,18 +72,18 @@ function Landing() {
       </section>
 
       
-      <section id="features" className="px-8 py-20 bg-slate-800/50">
+      <section id="features" className="px-4 sm:px-8 py-12 sm:py-20 bg-slate-800/50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-blue-400 font-semibold mb-2">CORE FEATURES</p>
-            <h2 className="text-4xl font-bold mb-4">Experience True Focus</h2>
-            <p className="text-slate-300 text-lg">
+          <div className="text-center mb-8 sm:mb-12">
+            <p className="text-blue-400 font-semibold mb-2 text-sm sm:text-base">CORE FEATURES</p>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Experience True Focus</h2>
+            <p className="text-slate-300 text-base sm:text-lg">
               Everything you need to capture your ideas without the clutter.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 hover:border-blue-500 transition">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 sm:p-8 hover:border-blue-500 transition">
               <div className="bg-blue-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                 <FaLock className="text-blue-400 text-xl" />
               </div>
@@ -87,7 +93,7 @@ function Landing() {
               </p>
             </div>
             
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 hover:border-blue-500 transition">
+            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 sm:p-8 hover:border-blue-500 transition">
               <div className="bg-blue-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                 <FaEye className="text-blue-400 text-xl" />
               </div>
@@ -97,7 +103,7 @@ function Landing() {
               </p>
             </div>
             
-            <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 hover:border-blue-500 transition">
+            <div className="bg-slate-800 border border-slate-700 rounded-lg p-6 sm:p-8 hover:border-blue-500 transition">
               <div className="bg-blue-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                 <FaSync className="text-blue-400 text-xl" />
               </div>
@@ -111,12 +117,12 @@ function Landing() {
       </section>
 
       
-      <section className="px-8 py-20">
+      <section className="px-4 sm:px-8 py-12 sm:py-20">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-4">Designed for clarity</h2>
-              <p className="text-slate-300 text-lg mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Designed for clarity</h2>
+              <p className="text-slate-300 text-base sm:text-lg mb-6">
                 A sneak peek into your new distraction-free workspace. 
                 Dark mode included by default to ease your eyes during late-night inspiration bursts.
               </p>
@@ -138,19 +144,19 @@ function Landing() {
       </section>
 
       
-      <footer className="border-t border-slate-700 px-8 py-8">
+      <footer className="border-t border-slate-700 px-4 sm:px-8 py-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-0 mb-8">
             <div className="flex items-center gap-2">
               <div className="text-blue-500 text-2xl">📝</div>
               <span className="text-xl font-bold">NoteManager</span>
             </div>
-            <div className="flex gap-8">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm sm:text-base">
               <a href="#" className="text-slate-400 hover:text-white transition">Privacy Policy</a>
               <a href="#" className="text-slate-400 hover:text-white transition">Terms of Service</a>
               <a href="#" className="text-slate-400 hover:text-white transition">Support</a>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 sm:gap-4">
               <a href="#" className="text-slate-400 hover:text-white transition">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>

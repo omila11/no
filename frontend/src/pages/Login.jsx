@@ -50,30 +50,30 @@ const Login = () => {
     return (
         <div className="min-h-screen bg-slate-900 text-white">
             
-            <nav className="flex items-center justify-between px-8 py-4 border-b border-slate-700">
+            <nav className="flex items-center justify-between px-4 sm:px-8 py-4 border-b border-slate-700">
                 <Link to="/" className="flex items-center gap-2">
                     <div className="text-blue-500 text-2xl">📝</div>
                     <span className="text-xl font-bold">NoteX</span>
                 </Link>
-                <a href="#" className="text-slate-300 hover:text-white transition text-sm">Contact Support</a>
+                <a href="#" className="text-slate-300 hover:text-white transition text-xs sm:text-sm">Contact Support</a>
             </nav>
 
         
             <div className="flex justify-center items-center min-h-[calc(100vh-80px)] px-4 py-12">
                 <div className="w-full max-w-md">
                    
-                    <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-8 border border-slate-700/50 shadow-xl">
+                    <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 sm:p-8 border border-slate-700/50 shadow-xl">
                         
                         <div className="flex justify-center mb-6">
-                            <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center">
-                                <FaLock className="text-blue-500 text-2xl" />
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-600/20 rounded-full flex items-center justify-center">
+                                <FaLock className="text-blue-500 text-xl sm:text-2xl" />
                             </div>
                         </div>
 
                         
                         <div className="text-center mb-6">
-                            <h1 className="text-2xl font-bold mb-2">Welcome Back</h1>
-                            <p className="text-slate-400 text-sm">Organize your thoughts privately.</p>
+                            <h1 className="text-xl sm:text-2xl font-bold mb-2">Welcome Back</h1>
+                            <p className="text-slate-400 text-xs sm:text-sm">Organize your thoughts privately.</p>
                         </div>
 
                         <form onSubmit={handleSubmit}>
@@ -141,20 +141,20 @@ const Login = () => {
                         </div>
 
                         
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <button 
                                 onClick={handleGoogleLogin}
-                                className='bg-slate-900 border border-slate-600 text-white px-4 py-3 rounded-lg hover:bg-slate-700 transition font-medium flex items-center justify-center gap-2'
+                                className='bg-slate-900 border border-slate-600 text-white px-4 py-3 rounded-lg hover:bg-slate-700 transition font-medium flex items-center justify-center gap-2 text-sm sm:text-base'
                             >
                                 <FcGoogle size={20} />
-                                Google
+                                <span className="hidden sm:inline">Google</span>
                             </button>
                             <button 
                                 onClick={handleGithubLogin}
-                                className='bg-slate-900 border border-slate-600 text-white px-4 py-3 rounded-lg hover:bg-slate-700 transition font-medium flex items-center justify-center gap-2'
+                                className='bg-slate-900 border border-slate-600 text-white px-4 py-3 rounded-lg hover:bg-slate-700 transition font-medium flex items-center justify-center gap-2 text-sm sm:text-base'
                             >
                                 <FaGithub size={20} />
-                                GitHub
+                                <span className="hidden sm:inline">GitHub</span>
                             </button>
                         </div>
 

@@ -64,25 +64,25 @@ function Signup() {
     return (
         <div className="min-h-screen bg-slate-900 text-white">
             
-            <nav className="flex items-center justify-between px-8 py-4 border-b border-slate-700">
+            <nav className="flex items-center justify-between px-4 sm:px-8 py-4 border-b border-slate-700">
                 <Link to="/" className="flex items-center gap-2">
                     <div className="text-blue-500 text-2xl">📝</div>
                     <span className="text-xl font-bold">NoteX</span>
                 </Link>
-                <a href="#" className="text-slate-300 hover:text-white transition">Help</a>
+                <a href="#" className="text-slate-300 hover:text-white transition text-xs sm:text-sm">Help</a>
             </nav>
 
             
             <div className="flex justify-center items-center min-h-[calc(100vh-80px)] px-4 py-12">
                 <div className="w-full max-w-md">
                     
-                    <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold mb-2">Create your account</h1>
-                        <p className="text-slate-400">Start organizing your thoughts today</p>
+                    <div className="text-center mb-6 sm:mb-8">
+                        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Create your account</h1>
+                        <p className="text-slate-400 text-sm sm:text-base">Start organizing your thoughts today</p>
                     </div>
 
                     
-                    <form onSubmit={handleSubmit} className="bg-slate-800 rounded-lg p-8 shadow-xl border border-slate-700">
+                    <form onSubmit={handleSubmit} className="bg-slate-800 rounded-lg p-6 sm:p-8 shadow-xl border border-slate-700">
                        
                         <div className="mb-4">
                             <label className="block text-sm font-medium mb-2">Name</label>
