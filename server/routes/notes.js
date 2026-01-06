@@ -7,7 +7,7 @@ const router = express.Router();
 // Get all notes for logged-in user
 router.get("/", authMiddleware, async (req, res) => {
     try {
-        const notes = await Note.find({userId: req.userId}).sort({updatedAt: -1});
+        const notes = await Note.find({userId: req.userId, isDeleted: false}).sort({updatedAt: -1});
         res.status(200).json({
             success: true,
             notes
@@ -49,7 +49,7 @@ router.get("/:id", authMiddleware, async (req, res) => {
 // Create a new note
 router.post("/", authMiddleware, async (req, res) => {
     try {
-        const {title, content} = req.body;
+        const {title, content, tags} = req.body;
 
         if (!title || !content) {
             return res.status(400).json({
@@ -61,6 +61,7 @@ router.post("/", authMiddleware, async (req, res) => {
         const note = new Note({
             title,
             content,
+            tags: tags || [],
             userId: req.userId
         });
 
@@ -83,7 +84,7 @@ router.post("/", authMiddleware, async (req, res) => {
 // Update a note
 router.put("/:id", authMiddleware, async (req, res) => {
     try {
-        const {title, content} = req.body;
+        const {title, content, tags} = req.body;
 
         const note = await Note.findOne({_id: req.params.id, userId: req.userId});
 
@@ -96,6 +97,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
 
         if (title) note.title = title;
         if (content) note.content = content;
+        if (tags) note.tags = tags;
         note.updatedAt = Date.now();
 
         await note.save();
@@ -114,8 +116,114 @@ router.put("/:id", authMiddleware, async (req, res) => {
     }
 });
 
-// Delete a note
+// Delete a note (soft delete - move to trash)
 router.delete("/:id", authMiddleware, async (req, res) => {
+    try {
+        const note = await Note.findOne({_id: req.params.id, userId: req.userId});
+
+        if (!note) {
+            return res.status(404).json({
+                success: false,
+                message: "Note not found"
+            });
+        }
+
+        note.isDeleted = true;
+        note.updatedAt = Date.now();
+        await note.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Note moved to trash"
+        });
+    } catch (error) {
+        console.error("Delete note error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error deleting note"
+        });
+    }
+});
+
+// Toggle favorite
+router.patch("/:id/favorite", authMiddleware, async (req, res) => {
+    try {
+        const note = await Note.findOne({_id: req.params.id, userId: req.userId});
+
+        if (!note) {
+            return res.status(404).json({
+                success: false,
+                message: "Note not found"
+            });
+        }
+
+        note.isFavorite = !note.isFavorite;
+        note.updatedAt = Date.now();
+        await note.save();
+
+        res.status(200).json({
+            success: true,
+            message: note.isFavorite ? "Added to favorites" : "Removed from favorites",
+            note
+        });
+    } catch (error) {
+        console.error("Toggle favorite error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error updating favorite status"
+        });
+    }
+});
+
+// Get trash notes
+router.get("/trash/all", authMiddleware, async (req, res) => {
+    try {
+        const notes = await Note.find({userId: req.userId, isDeleted: true}).sort({updatedAt: -1});
+        res.status(200).json({
+            success: true,
+            notes
+        });
+    } catch (error) {
+        console.error("Get trash error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error fetching trash"
+        });
+    }
+});
+
+// Restore note from trash
+router.patch("/:id/restore", authMiddleware, async (req, res) => {
+    try {
+        const note = await Note.findOne({_id: req.params.id, userId: req.userId});
+
+        if (!note) {
+            return res.status(404).json({
+                success: false,
+                message: "Note not found"
+            });
+        }
+
+        note.isDeleted = false;
+        note.updatedAt = Date.now();
+        await note.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Note restored successfully",
+            note
+        });
+    } catch (error) {
+        console.error("Restore note error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error restoring note"
+        });
+    }
+});
+
+// Permanently delete note
+router.delete("/:id/permanent", authMiddleware, async (req, res) => {
     try {
         const note = await Note.findOneAndDelete({_id: req.params.id, userId: req.userId});
 
@@ -128,13 +236,13 @@ router.delete("/:id", authMiddleware, async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Note deleted successfully"
+            message: "Note permanently deleted"
         });
     } catch (error) {
-        console.error("Delete note error:", error);
+        console.error("Permanent delete error:", error);
         res.status(500).json({
             success: false,
-            message: "Error deleting note"
+            message: "Error deleting note permanently"
         });
     }
 });

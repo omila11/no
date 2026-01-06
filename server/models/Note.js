@@ -15,6 +15,18 @@ const noteSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
+    tags: {
+        type: [String],
+        default: []
+    },
+    isFavorite: {
+        type: Boolean,
+        default: false
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
     attachments: {
         type: [String],
         default: []
