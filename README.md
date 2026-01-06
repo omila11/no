@@ -5,23 +5,23 @@ A modern, distraction-free note-taking application with a beautiful UI and power
 ##  Features
 
 ### Core Functionality
-- 📝 **Create & Edit Notes** - Write and organize your thoughts with a clean, intuitive interface
-- 🔍 **Smart Search** - Quickly find notes by searching titles or content
-- 🏷️ **Tag System** - Organize notes with customizable tags (Work, Personal, Reading, Ideas, Family, Shopping)
-- ⭐ **Favorites** - Mark important notes for quick access
-- 🗑️ **Trash Management** - Safely delete and restore notes with permanent delete option
+- **Create & Edit Notes** - Write and organize your thoughts with a clean, intuitive interface
+- **Smart Search** - Quickly find notes by searching titles or content
+- **Tag System** - Organize notes with customizable tags (Work, Personal, Reading, Ideas, Family, Shopping)
+- **Favorites** - Mark important notes for quick access
+- **Trash Management** - Safely delete and restore notes with permanent delete option
 
 ### User Experience
-- 🎨 **Theme Switching** - Toggle between Dark and Light modes
-- 📏 **Font Size Control** - Choose from Small, Medium, or Large text sizes
-- 📦 **Compact Mode** - Maximize screen space to view more notes at once
-- 🔄 **Smart Sorting** - Sort notes by Date Modified, Date Created, or Title (A-Z)
-- 📱 **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+- **Theme Switching** - Toggle between Dark and Light modes
+- **Font Size Control** - Choose from Small, Medium, or Large text sizes
+- **Compact Mode** - Maximize screen space to view more notes at once
+- **Smart Sorting** - Sort notes by Date Modified, Date Created, or Title (A-Z)
+- **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
 
 ### Security & Privacy
-- 🔐 **User Authentication** - Secure signup and login system
-- 🔒 **Private Notes** - Your notes are accessible only to you
-- 💾 **Persistent Storage** - Notes saved securely in MongoDB
+- **User Authentication** - Secure signup and login system
+- **Private Notes** - Your notes are accessible only to you
+- **Persistent Storage** - Notes saved securely in MongoDB
 
 ##  Tech Stack
 
