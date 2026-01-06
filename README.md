@@ -1,217 +1,222 @@
-# NoteX - Personal Note Manager 📝
+# NoteX 📝
 
-A full-stack note-taking application where users can securely sign up, log in, and manage their personal notes with complete CRUD functionality.
+A modern, distraction-free note-taking application with a beautiful UI and powerful features. Organize your thoughts, ideas, and daily journals with ease.
 
-## 🚀 Features
+![NoteX Banner](frontend/src/assets/images/notex1.jfif)
 
-- **User Authentication**: Secure signup and login with JWT tokens
-- **Private Notes**: Each user can only see and manage their own notes
-- **Full CRUD Operations**: Create, Read, Update, and Delete notes
-- **Responsive Design**: Beautiful UI built with React and Tailwind CSS
-- **Real-time Feedback**: Toast notifications for user actions
-- **Protected Routes**: Secure dashboard accessible only to authenticated users
+## ✨ Features
+
+### Core Functionality
+- 📝 **Create & Edit Notes** - Write and organize your thoughts with a clean, intuitive interface
+- 🔍 **Smart Search** - Quickly find notes by searching titles or content
+- 🏷️ **Tag System** - Organize notes with customizable tags (Work, Personal, Reading, Ideas, Family, Shopping)
+- ⭐ **Favorites** - Mark important notes for quick access
+- 🗑️ **Trash Management** - Safely delete and restore notes with permanent delete option
+
+### User Experience
+- 🎨 **Theme Switching** - Toggle between Dark and Light modes
+- 📏 **Font Size Control** - Choose from Small, Medium, or Large text sizes
+- 📦 **Compact Mode** - Maximize screen space to view more notes at once
+- 🔄 **Smart Sorting** - Sort notes by Date Modified, Date Created, or Title (A-Z)
+- 📱 **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+
+### Security & Privacy
+- 🔐 **User Authentication** - Secure signup and login system
+- 🔒 **Private Notes** - Your notes are accessible only to you
+- 💾 **Persistent Storage** - Notes saved securely in MongoDB
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 - **React** - UI library
-- **Vite** - Build tool and dev server
-- **React Router DOM** - Client-side routing
-- **Axios** - HTTP client
+- **Vite** - Fast build tool and dev server
 - **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **Axios** - HTTP client
 - **React Icons** - Icon library
 - **React Toastify** - Toast notifications
 
 ### Backend
-- **Node.js** - Runtime environment
-- **Express** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - MongoDB ODM
-- **JWT** - Authentication
+- **Node.js** - JavaScript runtime
+- **Express** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB object modeling
+- **JWT** - JSON Web Tokens for authentication
 - **bcrypt** - Password hashing
-- **CORS** - Cross-origin resource sharing
 
-## 📦 Installation & Setup
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v14 or higher)
 - MongoDB (local or Atlas)
 - npm or yarn
 
-### Backend Setup
+### Installation
 
-1. Navigate to the server directory:
+1. **Clone the repository**
 ```bash
+git clone https://github.com/yourusername/notex.git
+cd notex
+```
+
+2. **Install dependencies**
+
+For Windows users, run the installation script:
+```bash
+install.bat
+```
+
+Or manually install:
+```bash
+# Install server dependencies
 cd server
-```
+npm install
 
-2. Install dependencies:
-```bash
+# Install frontend dependencies
+cd ../frontend
 npm install
 ```
 
-3. Create a `.env` file in the server directory:
+3. **Set up environment variables**
+
+Create a `.env` file in the `server` directory:
 ```env
-MONGODB_URI=mongodb://localhost:27017/notex
-JWT_SECRET=your-secret-key-change-this
 PORT=5000
+MONGODB_URI=mongodb://localhost:27017/notex
+JWT_SECRET=your_jwt_secret_key_here
 ```
 
-4. Start the server:
+4. **Start MongoDB**
+Make sure MongoDB is running on your local machine or use MongoDB Atlas
+
+5. **Run the application**
+
+For Windows users, use the start script:
 ```bash
-npm start
+start.bat
 ```
 
-The server will run on `http://localhost:5000`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
+Or manually start:
 ```bash
-cd frontend
-```
+# Start the backend server (in server directory)
+npm run dev
 
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
+# Start the frontend (in frontend directory)
 npm run dev
 ```
 
-The frontend will run on `http://localhost:5173`
+6. **Access the application**
+- Frontend: http://localhost:5173
+- Backend: http://localhost:5000
 
-## 🎯 Usage
-
-1. **Sign Up**: Create a new account with your name, email, and password
-2. **Log In**: Access your account using your credentials
-3. **Dashboard**: View all your notes in a beautiful card layout
-4. **Create Note**: Click "New Note" to add a new note with title and content
-5. **Edit Note**: Click "Edit" on any note to modify it
-6. **Delete Note**: Click "Delete" to remove a note (with confirmation)
-7. **Logout**: Safely log out of your account
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
 NoteX/
 ├── frontend/
+│   ├── public/
 │   ├── src/
+│   │   ├── assets/
+│   │   │   └── images/
 │   │   ├── components/
 │   │   │   └── ProtectedRoute.jsx
 │   │   ├── pages/
-│   │   │   ├── Signup.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Landing.jsx
 │   │   │   ├── Login.jsx
-│   │   │   └── Dashboard.jsx
+│   │   │   └── Signup.jsx
 │   │   ├── App.jsx
 │   │   ├── main.jsx
 │   │   └── index.css
 │   ├── package.json
 │   └── vite.config.js
 │
-└── server/
-    ├── models/
-    │   ├── User.js
-    │   └── Note.js
-    ├── routes/
-    │   ├── auth.js
-    │   └── notes.js
-    ├── middleware/
-    │   └── auth.js
-    ├── index.js
-    └── package.json
+├── server/
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── models/
+│   │   ├── Note.js
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── notes.js
+│   ├── index.js
+│   └── package.json
+│
+├── install.bat
+├── start.bat
+└── README.md
 ```
 
-## 🔐 API Endpoints
+## 🎯 Usage
+
+### Creating Notes
+1. Click the "Create New Note" button
+2. Enter a title and content
+3. Add tags to organize your note
+4. Click "Save" to create the note
+
+### Managing Notes
+- **Edit**: Click on a note to view, then click the edit button
+- **Delete**: Click the delete button to move to trash
+- **Favorite**: Click the star icon to mark as favorite
+- **Restore**: Go to trash and click restore to recover deleted notes
+- **Permanent Delete**: In trash, permanently delete notes
+
+### Organizing Notes
+- **Filter by Tags**: Click tag filters to view notes by category
+- **Search**: Use the search bar to find notes by title or content
+- **Sort**: Choose sorting method (Date Modified, Date Created, or Title)
+
+### Customization
+1. Click the Settings button in the sidebar
+2. Choose your preferences:
+   - **Theme**: Dark or Light mode
+   - **Font Size**: Small, Medium, or Large
+   - **Default View**: All Notes, Favorites, or Trash
+   - **Compact Mode**: Toggle for more screen space
+
+## 🔑 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/signup` - Register a new user
 - `POST /api/auth/login` - Login user
 
-### Notes (Protected)
-- `GET /api/notes` - Get all notes for logged-in user
-- `GET /api/notes/:id` - Get a single note
+### Notes
+- `GET /api/notes` - Get all user notes
 - `POST /api/notes` - Create a new note
+- `GET /api/notes/:id` - Get a specific note
 - `PUT /api/notes/:id` - Update a note
-- `DELETE /api/notes/:id` - Delete a note
+- `DELETE /api/notes/:id` - Move note to trash
+- `PATCH /api/notes/:id/favorite` - Toggle favorite status
+- `GET /api/notes/trash/all` - Get all trashed notes
+- `PATCH /api/notes/:id/restore` - Restore note from trash
+- `DELETE /api/notes/:id/permanent` - Permanently delete note
 
-## 🎨 Design Decisions
+## 🤝 Contributing
 
-- **JWT Authentication**: Secure token-based authentication without sessions
-- **Protected Routes**: Frontend route protection ensures only authenticated users access the dashboard
-- **User Privacy**: Backend middleware validates user ownership of notes
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Toast Notifications**: Real-time feedback for better UX
-- **Modal for Note Creation/Editing**: Clean UI without page navigation
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 🧪 Self-Evaluation
-
-### Code Quality: 9/10
-- Clean, organized, and well-structured code
-- Proper separation of concerns (models, routes, middleware)
-- Reusable components
-- **Why not 10?**: Could add more comprehensive error handling and input validation
-
-### Functionality: 10/10
-- All required features implemented (Auth + CRUD)
-- Smooth user experience
-- Secure authentication with JWT
-- Complete privacy - users only see their own notes
-
-### UI/UX Design: 8/10
-- Clean and modern interface
-- Responsive design works on all devices
-- Intuitive navigation
-- **Why not 10?**: Could add more advanced features like search, categories, or dark mode
-
-### Security: 8/10
-- Passwords hashed with bcrypt
-- JWT token authentication
-- Protected routes on both frontend and backend
-- **Why not 10?**: Could add rate limiting, input sanitization, and refresh tokens
-
-### Code Documentation: 7/10
-- Clear function and variable names
-- Some inline comments
-- **Why not 10?**: Could add more detailed JSDoc comments and API documentation
-
-## 🚀 Future Enhancements
-
-- Search and filter notes
-- Note categories/tags
-- Rich text editor
-- Dark mode
-- Note sharing
-- Export notes (PDF, Markdown)
-- Email verification
-- Password reset functionality
-
-## 👨‍💻 Developer Notes
-
-### Time Spent: ~6-8 hours
-- Backend setup & auth: 2 hours
-- Note CRUD operations: 1.5 hours
-- Frontend components: 2 hours
-- Styling & UX: 1.5 hours
-- Testing & debugging: 1 hour
-
-### Trade-offs Made:
-1. **Simple JWT vs Refresh Tokens**: Used simple JWT for quicker implementation. In production, would add refresh tokens.
-2. **Client-side State**: Used local state instead of Context API or Redux for simplicity. Good enough for this scale.
-3. **Basic Validation**: Implemented basic validation. Could add more robust validation with libraries like Joi or Yup.
-
-### What I Learned:
-- Better understanding of JWT authentication flow
-- Improved React Router v6 usage with protected routes
-- Tailwind CSS utility classes for rapid UI development
-- MongoDB indexing for better query performance
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📝 License
 
-This project is open source and available for educational purposes.
+This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Contact
+## 👨‍💻 Author
 
-Created for the Software Engineer Internship application - Feel free to reach out with questions!
+Your Name - [Your GitHub](https://github.com/yourusername)
+
+## 🙏 Acknowledgments
+
+- Icons by [React Icons](https://react-icons.github.io/react-icons/)
+- UI Design inspired by modern note-taking applications
+- Built with ❤️ using React and Node.js
+
+---
+
+**NoteX** - Your thoughts. Organized. Private.
